@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,13 +29,47 @@ fun MainPage(modifier: Modifier = Modifier) {
     Column (
         modifier = modifier
             .fillMaxWidth()
-            .padding(20.dp),
+            .padding(20.dp)
+            .padding(top = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(text = ciudad.value, style = MaterialTheme.typography.bodySmall)
         Text(text = "${temperatura.value}°", style = MaterialTheme.typography.titleLarge)
         Text(text = descripcion.value)
         Text(text = "Sensacion Termica: ${st.value}°")
+
+        Button(
+            onClick = {
+                ciudad.value = ""
+                temperatura.value = 0
+                descripcion.value = ""
+                st.value = 0
+            }
+        ) {
+            Text(text = "Borrar todo")
+        }
+
+        Button(
+            onClick = {
+                ciudad.value = "CABA"
+                temperatura.value = 10
+                descripcion.value = "Sigue Nublado"
+                st.value = 900
+            }
+        ) {
+            Text(text = "Temp CABA")
+        }
+
+        Button(
+            onClick = {
+                ciudad.value = "Cordoba"
+                temperatura.value = 20
+                descripcion.value = "Cuidad de Cordoba"
+                st.value = 25
+            }
+        ) {
+            Text(text = "Temp Cordoba")
+        }
     }
 
 }
