@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 //import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.appclima.ui.theme.AppClimaTheme
 
 
 @Composable
 fun MainPage(modifier: Modifier = Modifier) {
 
-   // val viewModel:MainPageViewModel = viewModel()
+    val viewModel:MainPageViewModel = viewModel()
 
     var ciudad = remember {mutableStateOf<String>("Caba")}
     var temperatura = remember {mutableStateOf<Int>(19)}
