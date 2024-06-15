@@ -23,20 +23,24 @@ import com.example.appclima.ui.theme.AppClimaTheme
 
 @Composable
 fun MainPage(modifier: Modifier){
-    MainView(viewModel = viewModel())
+    val viewModel : MainPageViewModel = viewModel()
+    MainView(
+        state = viewModel.uiState,
+        onAction = {viewModel.ejecutar(it)}
+    )
 }
 
 @Composable
 fun MainView(
     modifier: Modifier = Modifier,
-    viewModel:MainPageViewModel
+    state :Estado,
+    onAction: (Intencion) -> Unit
 ) {
-
-
-    var ciudad = remember {mutableStateOf<String>("Caba")}
-    var temperatura = remember {mutableStateOf<Int>(19)}
-    var descripcion = remember {mutableStateOf<String>("Nublado")}
-    var st = remember {mutableStateOf<Int>(12)}
+//
+//    var ciudad = remember {mutableStateOf<String>("Caba")}
+//    var temperatura = remember {mutableStateOf<Int>(19)}
+//    var descripcion = remember {mutableStateOf<String>("Nublado")}
+//    var st = remember {mutableStateOf<Int>(12)}
 
     Column (
         modifier = modifier
@@ -45,35 +49,63 @@ fun MainView(
             .padding(top = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = viewModel.ciudad.value, style = MaterialTheme.typography.bodySmall)
-        Text(text = "${viewModel.temperatura.value}°", style = MaterialTheme.typography.titleLarge)
-        Text(text = viewModel.descripcion.value)
-        Text(text = "Sensacion Termica: ${viewModel.st.value}°")
-
+        when(state){
+            is Estado.Error -> ErrorView(mensaje = "Este es el mensaje de ERROR")
+            is Estado.Exitoso -> ClimaView(ciudad= state.ciudad, temperatura= state.temperatura, descripcion= state.descripcion, st= state.st, latitud= state.latitud, longitud= state.longitud)
+            Estado.Vacio -> EmptyView()
+        }
+        
         Spacer(modifier = Modifier.height(100.dp))
 
         Button(
-            onClick = {viewModel.borrarTodo()}) {
+            onClick = {onAction(Intencion.BorrarTodo)}) {
             Text(text = "Borrar todo")
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {viewModel.mostrarCABA()}) {
+        Button(onClick = {onAction(Intencion.MostrarCABA)}) {
             Text(text = "Temp CABA")
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {viewModel.mostrarCordoba()}) {
+        Button(onClick = {onAction(Intencion.MostrarCordoba)}) {
             Text(text = "Temp Cordoba")
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(onClick = {onAction(Intencion.MostrarError)}) {
+            Text(text = "Probar Error")
         }
     }
 
 }
 
+@Composable
+fun ErrorView(mensaje: String){
+    Text(text = mensaje)
+}
+
+@Composable
+fun ClimaView(ciudad: String, temperatura: Int, descripcion: String, st: Int, latitud: Long, longitud: Long){
+    Column{
+        Text(text = ciudad, style = MaterialTheme.typography.bodySmall)
+        Text(text = "${temperatura}°", style = MaterialTheme.typography.titleLarge)
+        Text(text = descripcion)
+        Text(text = "Sensacion Termica: ${st}°")
+        Text(text = "Latitud: ${latitud}")
+        Text(text = "Longitud: ${longitud}")
+    }
+}
+@Composable
+fun EmptyView(){
+    Text(text = "Sin informacion, apreta un boton")
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun MainPagePreview() {
     AppClimaTheme {
-        MainView(viewModel = viewModel())
+        MainView(state = Estado.Vacio, onAction = {} )
     }
 }

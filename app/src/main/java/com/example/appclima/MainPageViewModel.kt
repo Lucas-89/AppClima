@@ -1,14 +1,21 @@
 package com.example.appclima
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class MainPageViewModel: ViewModel() {
-    var ciudad =  mutableStateOf<String>("--")
-    var temperatura =  mutableStateOf<Int>(0)
-    var descripcion =  mutableStateOf<String>("--")
-    var st =  mutableStateOf<Int>(0)
-
+    //unico estado observable
+    var uiState by mutableStateOf<Estado>(Estado.Vacio)
+//
+//    var ciudad =  mutableStateOf<String>("--")
+//    var temperatura =  mutableStateOf<Int>(0)
+//    var descripcion =  mutableStateOf<String>("--")
+//    var st =  mutableStateOf<Int>(0)
+//    var longitud =  mutableStateOf<Long>(0)
+//    var latitud = mutableStateOf<Long>(0)
+//    var noHayDatos = mutableStateOf<Boolean>(true)
 
     private val climaCordoba = Clima(
         temperatura = 20,
@@ -27,25 +34,44 @@ class MainPageViewModel: ViewModel() {
         latitud = 6852,
         longitud = 854741
     )
-    fun borrarTodo(){
-        ciudad.value = ""
-        temperatura.value = 0
-        descripcion.value = ""
-        st.value = 0
+
+    fun ejecutar(intencion: Intencion) {
+        when(intencion){
+            Intencion.BorrarTodo -> borrarTodo()
+            Intencion.MostrarCABA -> mostrarCABA()
+            Intencion.MostrarCordoba -> mostrarCordoba()
+            Intencion.MostrarError -> mostrarError()
+        }
     }
 
-    fun mostrarCABA(){
-        ciudad.value = climaCABA.ciudad
-        temperatura.value = climaCABA.temperatura
-        descripcion.value = climaCABA.descripcion
-        st.value = climaCABA.st
+    private fun borrarTodo(){
+        uiState = Estado.Vacio
     }
 
-    fun mostrarCordoba(){
-        ciudad.value = climaCordoba.ciudad
-        temperatura.value = climaCordoba.temperatura
-        descripcion.value = climaCordoba.descripcion
-        st.value = climaCordoba.st
+    private fun mostrarCABA(){
+        uiState= Estado.Exitoso (
+            ciudad = climaCABA.ciudad,
+            temperatura = climaCABA.temperatura,
+            descripcion = climaCABA.descripcion,
+            st = climaCABA.st,
+            latitud = climaCABA.latitud,
+            longitud = climaCABA.longitud,
+        )
     }
+
+    private fun mostrarCordoba(){
+        uiState= Estado.Exitoso (
+            ciudad= climaCordoba.ciudad,
+            temperatura = climaCordoba.temperatura,
+            descripcion = climaCordoba.descripcion,
+            st = climaCordoba.st,
+            latitud = climaCordoba.latitud,
+            longitud = climaCordoba.latitud,
+        )
+    }
+    private fun mostrarError(){
+        uiState= Estado.Error("Este es el mensaje de Error")
+    }
+
 
 }
