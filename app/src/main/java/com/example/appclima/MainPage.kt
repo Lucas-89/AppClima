@@ -1,7 +1,9 @@
 package com.example.appclima
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -20,9 +22,16 @@ import com.example.appclima.ui.theme.AppClimaTheme
 
 
 @Composable
-fun MainPage(modifier: Modifier = Modifier) {
+fun MainPage(modifier: Modifier){
+    MainView(viewModel = viewModel())
+}
 
-    val viewModel:MainPageViewModel = viewModel()
+@Composable
+fun MainView(
+    modifier: Modifier = Modifier,
+    viewModel:MainPageViewModel
+) {
+
 
     var ciudad = remember {mutableStateOf<String>("Caba")}
     var temperatura = remember {mutableStateOf<Int>(19)}
@@ -41,14 +50,18 @@ fun MainPage(modifier: Modifier = Modifier) {
         Text(text = viewModel.descripcion.value)
         Text(text = "Sensacion Termica: ${viewModel.st.value}°")
 
+        Spacer(modifier = Modifier.height(100.dp))
+
         Button(
             onClick = {viewModel.borrarTodo()}) {
             Text(text = "Borrar todo")
         }
+        Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {viewModel.mostrarCABA()}) {
             Text(text = "Temp CABA")
         }
+        Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {viewModel.mostrarCordoba()}) {
             Text(text = "Temp Cordoba")
@@ -61,6 +74,6 @@ fun MainPage(modifier: Modifier = Modifier) {
 @Composable
 fun MainPagePreview() {
     AppClimaTheme {
-        MainPage()
+        MainView(viewModel = viewModel())
     }
 }

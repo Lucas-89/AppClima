@@ -9,6 +9,24 @@ class MainPageViewModel: ViewModel() {
     var descripcion =  mutableStateOf<String>("--")
     var st =  mutableStateOf<Int>(0)
 
+
+    private val climaCordoba = Clima(
+        temperatura = 20,
+        descripcion = "Ventoso",
+        st = 25,
+        ciudad = "Cordoba",
+        latitud = 35126,
+        longitud = 52414
+    )
+
+    private val climaCABA = Clima(
+        temperatura = 15,
+        descripcion = "Soleado",
+        st = 12,
+        ciudad = "CABA",
+        latitud = 6852,
+        longitud = 854741
+    )
     fun borrarTodo(){
         ciudad.value = ""
         temperatura.value = 0
@@ -17,17 +35,17 @@ class MainPageViewModel: ViewModel() {
     }
 
     fun mostrarCABA(){
-        ciudad.value = "CABA"
-        temperatura.value = 10
-        descripcion.value = "Sigue Nublado"
-        st.value = 900
+        ciudad.value = climaCABA.ciudad
+        temperatura.value = climaCABA.temperatura
+        descripcion.value = climaCABA.descripcion
+        st.value = climaCABA.st
     }
 
     fun mostrarCordoba(){
-        ciudad.value = "Cordoba"
-        temperatura.value = 20
-        descripcion.value = "Cuidad de Cordoba"
-        st.value = 25
+        ciudad.value = climaCordoba.ciudad
+        temperatura.value = climaCordoba.temperatura
+        descripcion.value = climaCordoba.descripcion
+        st.value = climaCordoba.st
     }
 
 }
