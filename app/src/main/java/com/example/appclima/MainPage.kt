@@ -36,41 +36,21 @@ fun MainPage(modifier: Modifier = Modifier) {
             .padding(top = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = ciudad.value, style = MaterialTheme.typography.bodySmall)
-        Text(text = "${temperatura.value}°", style = MaterialTheme.typography.titleLarge)
-        Text(text = descripcion.value)
-        Text(text = "Sensacion Termica: ${st.value}°")
+        Text(text = viewModel.ciudad.value, style = MaterialTheme.typography.bodySmall)
+        Text(text = "${viewModel.temperatura.value}°", style = MaterialTheme.typography.titleLarge)
+        Text(text = viewModel.descripcion.value)
+        Text(text = "Sensacion Termica: ${viewModel.st.value}°")
 
         Button(
-            onClick = {
-                ciudad.value = ""
-                temperatura.value = 0
-                descripcion.value = ""
-                st.value = 0
-            }
-        ) {
+            onClick = {viewModel.borrarTodo()}) {
             Text(text = "Borrar todo")
         }
 
-        Button(
-            onClick = {
-                ciudad.value = "CABA"
-                temperatura.value = 10
-                descripcion.value = "Sigue Nublado"
-                st.value = 900
-            }
-        ) {
+        Button(onClick = {viewModel.mostrarCABA()}) {
             Text(text = "Temp CABA")
         }
 
-        Button(
-            onClick = {
-                ciudad.value = "Cordoba"
-                temperatura.value = 20
-                descripcion.value = "Cuidad de Cordoba"
-                st.value = 25
-            }
-        ) {
+        Button(onClick = {viewModel.mostrarCordoba()}) {
             Text(text = "Temp Cordoba")
         }
     }

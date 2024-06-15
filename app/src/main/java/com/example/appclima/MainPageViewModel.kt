@@ -4,10 +4,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class MainPageViewModel: ViewModel() {
-    var ciudad =  mutableStateOf<String>("Caba")
-    var temperatura =  mutableStateOf<Int>(19)
-    var descripcion =  mutableStateOf<String>("Nublado")
-    var st =  mutableStateOf<Int>(12)
+    var ciudad =  mutableStateOf<String>("--")
+    var temperatura =  mutableStateOf<Int>(0)
+    var descripcion =  mutableStateOf<String>("--")
+    var st =  mutableStateOf<Int>(0)
 
     fun borrarTodo(){
         ciudad.value = ""
