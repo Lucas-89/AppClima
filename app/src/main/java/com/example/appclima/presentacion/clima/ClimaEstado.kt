@@ -1,6 +1,6 @@
-package com.example.appclima
+package com.example.appclima.presentacion.clima
 
-sealed class Estado{
+sealed class ClimaEstado{
     data class Exitoso(
         val ciudad: String =  "",
         val temperatura: Int = 0 ,
@@ -9,9 +9,10 @@ sealed class Estado{
         val longitud :  Long=0,
         val latitud : Long =0,
 
-        ): Estado()
+        ): ClimaEstado()
     data class Error(
         val mensaje: String = ""
-    ): Estado()
-    data object Vacio : Estado()
+    ): ClimaEstado()
+    data object Vacio : ClimaEstado()
+    data object Cargando : ClimaEstado()
 }

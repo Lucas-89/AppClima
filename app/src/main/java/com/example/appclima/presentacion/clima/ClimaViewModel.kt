@@ -1,13 +1,14 @@
-package com.example.appclima
+package com.example.appclima.presentacion.clima
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.appclima.repository.Clima
 
-class MainPageViewModel: ViewModel() {
+class ClimaViewModel: ViewModel() {
     //unico estado observable
-    var uiState by mutableStateOf<Estado>(Estado.Vacio)
+    var uiState by mutableStateOf<ClimaEstado>(ClimaEstado.Vacio)
 //
 //    var ciudad =  mutableStateOf<String>("--")
 //    var temperatura =  mutableStateOf<Int>(0)
@@ -35,21 +36,21 @@ class MainPageViewModel: ViewModel() {
         longitud = 854741
     )
 
-    fun ejecutar(intencion: Intencion) {
+    fun ejecutar(intencion: ClimaIntencion) {
         when(intencion){
-            Intencion.BorrarTodo -> borrarTodo()
-            Intencion.MostrarCABA -> mostrarCABA()
-            Intencion.MostrarCordoba -> mostrarCordoba()
-            Intencion.MostrarError -> mostrarError()
+            ClimaIntencion.BorrarTodo -> borrarTodo()
+            ClimaIntencion.MostrarCABA -> mostrarCABA()
+            ClimaIntencion.MostrarCordoba -> mostrarCordoba()
+            ClimaIntencion.MostrarError -> mostrarError()
         }
     }
 
     private fun borrarTodo(){
-        uiState = Estado.Vacio
+        uiState = ClimaEstado.Vacio
     }
 
     private fun mostrarCABA(){
-        uiState= Estado.Exitoso (
+        uiState= ClimaEstado.Exitoso (
             ciudad = climaCABA.ciudad,
             temperatura = climaCABA.temperatura,
             descripcion = climaCABA.descripcion,
@@ -60,7 +61,7 @@ class MainPageViewModel: ViewModel() {
     }
 
     private fun mostrarCordoba(){
-        uiState= Estado.Exitoso (
+        uiState= ClimaEstado.Exitoso (
             ciudad= climaCordoba.ciudad,
             temperatura = climaCordoba.temperatura,
             descripcion = climaCordoba.descripcion,
@@ -70,7 +71,7 @@ class MainPageViewModel: ViewModel() {
         )
     }
     private fun mostrarError(){
-        uiState= Estado.Error("Este es el mensaje de Error")
+        uiState= ClimaEstado.Error("Este es el mensaje de Error")
     }
 
 
