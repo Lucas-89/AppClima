@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.appclima.repository.Clima
+import com.example.appclima.repository.modelos.Clima
 
 class ClimaViewModel: ViewModel() {
     //unico estado observable
