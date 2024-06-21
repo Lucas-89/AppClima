@@ -80,7 +80,7 @@ fun ErrorView(mensaje: String){
 }
 
 @Composable
-fun ClimaView(ciudad: String, temperatura: Int, descripcion: String, st: Int, latitud: Long, longitud: Long){
+fun ClimaView(ciudad: String, temperatura: Double, descripcion: String, st: Double, latitud: Double, longitud: Double){
     Column{
         Text(text = ciudad, style = MaterialTheme.typography.bodySmall)
         Text(text = "${temperatura}°", style = MaterialTheme.typography.titleLarge)
@@ -95,7 +95,7 @@ fun EmptyView(){
     Text(text = "Sin informacion, apreta un boton")
 }
 
-
+////////////////////////////////////////////////////////////////
 @Preview(showBackground = true)
 @Composable
 fun ClimaPreviewVacio() {
@@ -118,11 +118,11 @@ fun ClimaPreviewExitoso() {
     AppClimaTheme {
         ClimaView(state = ClimaEstado.Exitoso(
             ciudad = "Monte Chingolo",
-            temperatura = 20,
+            temperatura = 20.0,
             descripcion = "Ventoso",
-            st = 19,
-            latitud = 6952,
-            longitud = 210
+            st = 19.0,
+            latitud = 6952.0,
+            longitud = 210.0
         ), onAction = {} )
     }
 }

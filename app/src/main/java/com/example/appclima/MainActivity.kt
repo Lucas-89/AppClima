@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.example.appclima.presentacion.ciudades.CiudadesPage
 import com.example.appclima.presentacion.clima.MainPage
 import com.example.appclima.ui.theme.AppClimaTheme
 
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppClimaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainPage(
+                    CiudadesPage(
 
                         modifier = Modifier.padding(innerPadding)
                     )
