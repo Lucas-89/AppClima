@@ -30,10 +30,10 @@ data class Weather(
 @Serializable
 
 data class Main(
-    val temp: Double,           // temperatura
-    val feelsLike: Double ,      // sensacion termica
-    val tempMin: Double ,
-    val tempMax: Double ,
+    val temp: Double,
+    val feelsLike: Double ? = null,
+    val tempMin: Double ? = null,
+    val tempMax: Double ? = null,
     val pressure: Long,
     val humidity: Long,
 )
