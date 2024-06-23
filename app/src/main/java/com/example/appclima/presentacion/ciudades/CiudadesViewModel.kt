@@ -14,11 +14,11 @@ import kotlinx.coroutines.launch
 
 class CiudadesViewModel(
     val repositorio: Repositorio,
-    val router: Router
+    val router: Router,
 ): ViewModel(){
 
     var uiState by mutableStateOf<CiudadesEstado>(CiudadesEstado.Vacio)
-
+    var ciudades : List<Ciudad> = emptyList()
     fun ejecutar(intencion: CiudadesIntencion){
         when(intencion){
             is CiudadesIntencion.BuscarCiudad -> buscarCiudades(nombreCiudad = intencion.nombreCiudad)
@@ -40,15 +40,12 @@ class CiudadesViewModel(
 
     }
 
-    private fun seleccionarCiudad(ciudad: Ciudad){              //deberia ser nombre
-      //cuando llego aca, entiendo que tengo que llamar a
-        // ClimaEstado.Resultado para que traiga el detalle
-        // del clima de la ciudad
-//        viewModelScope.launch {
-//            val climaDeLaCiudad = repositorio.traerClima()
-//        }
-        "Seleccionaste la ciudad ${ciudad.nombre}"
-        router.navegar(Ruta.Clima())
+    private fun seleccionarCiudad(ciudad: Ciudad){
+        val ruta = Ruta.Clima(
+            lat = ciudad.lat,
+            lon = ciudad.lon
+        )
+        router.navegar(ruta)
     }
 }
 

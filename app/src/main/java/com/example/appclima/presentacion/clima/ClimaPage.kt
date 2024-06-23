@@ -4,23 +4,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.appclima.presentacion.ciudades.CiudadesViewModel
-import com.example.appclima.presentacion.ciudades.CiudadesViewModelFactory
 import com.example.appclima.repository.RepositorioApi
 import com.example.appclima.router.Enrutador
-import com.example.appclima.router.Router
+
 
 
 @Composable
 fun ClimaPage(
     modifier: Modifier,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    lat: Float,
+    lon: Float
 ){
     val viewModel : ClimaViewModel = viewModel(
-        factory = ClimaViewModelFactory(
+        factory = ClimaViewModel.ClimaViewModelFactory(
             repositorio = RepositorioApi(),
             // repositorio = RepositorioMock()
-            router = Enrutador(navHostController)
+            router = Enrutador(navHostController),
+            lat = lat,
+            lon = lon
         )
     )
     ClimaView(
@@ -28,3 +30,28 @@ fun ClimaPage(
         onAction = { viewModel.ejecutar(it) }
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,13 +20,7 @@ data class Clima(
     val main: Main,
     val wind: Wind,
     val clouds: Clouds,
-    val sys: Sys,
     val name: String,
-//    val visibility: Long,
-//    val dt: Long,
-//    val timezone: Long,
-//    val id: Long,
-//    val cod: Long,
 )
 @Serializable
 data class Coord(
@@ -65,12 +59,4 @@ data class Wind (
 data class Clouds(
     val all: Long,
 )
-@Serializable
 
-data class Sys(
-    val type: Long,
-    val id: Long,
-    val country: String,
-    val sunrise: Long,
-    val sunset: Long,
-)

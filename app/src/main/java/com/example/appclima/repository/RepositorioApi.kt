@@ -23,25 +23,25 @@ class RepositorioApi : Repositorio {
             })
         }
     }
-    override suspend fun buscarCiudad(ciudad: String): Array<Ciudad> {
+    override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
         val respuesta = cliente.get(urlCiudad){
             parameter("q", ciudad)
             parameter("limit", 5)
             parameter("appid", apiKey)
         }
         if (respuesta.status == HttpStatusCode.OK){
-           val ciudades = respuesta.body<Array<Ciudad>>()
+           val ciudades = respuesta.body<List<Ciudad>>()
             return ciudades
         } else{
             throw Exception()
         }
     }
 
-    override suspend fun traerClima(ciudad: Ciudad): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float): Clima {
 
         val respuesta = cliente.get("https://api.openweathermap.org/data/2.5/weather"){
-            parameter("lat", -34.609)
-            parameter("lon", -58.46)
+            parameter("lat", lat)
+            parameter("lon", lon)
             parameter("units", "metric")
             parameter("appid", apiKey)
         }
@@ -53,7 +53,7 @@ class RepositorioApi : Repositorio {
         }
     }
 
-    override suspend fun traerPronostico(ciudad: Ciudad): List<Clima> {
+    override suspend fun traerPronostico(lat: Float, lon: Float): List<Clima> {
         TODO("Not yet implemented")
         //para esto necesito saber que responde esa api
     }

@@ -18,8 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.appclima.presentacion.clima.ClimaEstado
-import com.example.appclima.presentacion.clima.ClimaIntencion
 import com.example.appclima.repository.modelos.Ciudad
 
 @Composable
@@ -54,22 +52,21 @@ fun CiudadesView(
             )
         }
         when (state) {
-            CiudadesEstado.Vacio -> EmptyView()
+            is CiudadesEstado.Error -> Text(text = state.mensajeError)
             CiudadesEstado.Cargando -> {Text(text = "Cargando")}
-            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades, {onAction(CiudadesIntencion.SeleccionarCiudad(it))})
-            is CiudadesEstado.Error -> {Text(text = state.mensajeError)}
+            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades) {
+                onAction(
+                    CiudadesIntencion.SeleccionarCiudad(it)
+                )
+            }
+            is CiudadesEstado.Vacio -> Text(text = "No hay resultados")
         }
     }
 }
 
-@Composable
-fun EmptyView(){Text(text = "Sin Resultados")}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaDeCiudades(ciudades: Array<Ciudad>, onSelect:(Ciudad)-> Unit){
-    //TODO aca va el resultado de la buqueda, seria una lista de ciudades
-    //aca falta la logica para que si la busqueda no da resultados lo muestre
+fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect:(Ciudad)-> Unit){
     LazyColumn {
         items(items = ciudades){
             Card(onClick = { onSelect(it) }){

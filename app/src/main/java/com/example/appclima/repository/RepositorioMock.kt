@@ -4,39 +4,39 @@ import com.example.appclima.repository.modelos.Ciudad
 import com.example.appclima.repository.modelos.Clima
 
 class RepositorioMock : Repositorio {
-    override suspend fun buscarCiudad(ciudad: String): Array<Ciudad> {
+    override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
         val ciudad1 = Ciudad(
             nombre = "Bahia Blanca",
-            lat = 123.2,
-            lon = 4324.123,
+            lat = 123.2f,
+            lon = 4324.123f,
             state = "Argentina",
             country = "Argentina",
         )
         val ciudad2 = Ciudad(
             nombre = "Chubut",
-            lat = 123.2,
-            lon = 4344.1823,
+            lat = 123.2f,
+            lon = 4344.1823f,
             state = "Argentina",
             country = "Argentina",
 
         )
         val ciudad3 = Ciudad(
             nombre = "Rosasio",
-            lat = 543.2,
-            lon = 454.14,
+            lat = 543.2f,
+            lon = 454.14f,
             state = "Argentina",
             country = "Argentina",
 
         )
-        return arrayOf(ciudad1, ciudad2, ciudad3)
+        return listOf(ciudad1, ciudad2, ciudad3)
     }
 
-    override suspend fun traerClima(ciudad: Ciudad): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float): Clima {
         TODO("Not yet implemented")
         //aca deberia rellenar con una informacion de clima
     }
 
-    override suspend fun traerPronostico(ciudad: Ciudad): List<Clima> {
+    override suspend fun traerPronostico(lat: Float, lon: Float): List<Clima> {
         TODO("Not yet implemented")
         //aca deberia rellenar con una informacion del pronostico extendido
     }
