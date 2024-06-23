@@ -18,7 +18,7 @@ fun CiudadesPage(
 ){
     val viewModel : CiudadesViewModel = viewModel(
         factory = CiudadesViewModelFactory(
-             repositorio = RepositorioApi(),
+            repositorio = RepositorioApi(),
             //repositorio = RepositorioMock(),
             router = Enrutador(navHostController)
         )

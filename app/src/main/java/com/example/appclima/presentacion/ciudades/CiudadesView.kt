@@ -70,7 +70,7 @@ fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect:(Ciudad)-> Unit){
     LazyColumn {
         items(items = ciudades){
             Card(onClick = { onSelect(it) }){
-               Text(text = it.nombre)
+               Text(text = it.name)
             }
         }
     }

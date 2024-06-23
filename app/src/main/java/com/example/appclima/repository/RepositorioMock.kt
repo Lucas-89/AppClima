@@ -6,14 +6,14 @@ import com.example.appclima.repository.modelos.Clima
 class RepositorioMock : Repositorio {
     override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
         val ciudad1 = Ciudad(
-            nombre = "Bahia Blanca",
+            name = "Bahia Blanca",
             lat = 123.2f,
             lon = 4324.123f,
             state = "Argentina",
             country = "Argentina",
         )
         val ciudad2 = Ciudad(
-            nombre = "Chubut",
+            name = "Chubut",
             lat = 123.2f,
             lon = 4344.1823f,
             state = "Argentina",
@@ -21,7 +21,7 @@ class RepositorioMock : Repositorio {
 
         )
         val ciudad3 = Ciudad(
-            nombre = "Rosasio",
+            name = "Rosasio",
             lat = 543.2f,
             lon = 454.14f,
             state = "Argentina",

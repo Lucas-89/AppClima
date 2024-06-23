@@ -2,16 +2,6 @@ package com.example.appclima.repository.modelos
 
 import kotlinx.serialization.Serializable
 
-//@Serializable
-//data class Clima (
-//    val temperatura: Int,
-//    val ciudad: String,
-//    val descripcion: String,
-//    val st: Int,
-//    val latitud: Long,
-//    val longitud: Long
-//)
-
 @Serializable
 data class Clima(
     val coord: Coord,

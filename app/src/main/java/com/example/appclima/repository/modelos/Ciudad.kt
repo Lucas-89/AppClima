@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 
 data class Ciudad (
-    val nombre: String,
+    val name: String,
     val lat: Float,
     val lon: Float,
     val state: String? = null,
