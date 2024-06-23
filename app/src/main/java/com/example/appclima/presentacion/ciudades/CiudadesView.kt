@@ -40,7 +40,7 @@ fun CiudadesView(
 
         Button(onClick = { //aca deberia usar Intencion.Seleccionar
             if (ciudadABuscar.isNotEmpty()) {
-                onAction(CiudadesIntencion.BuscarCiudad(ciudadABuscar))
+                onAction(CiudadesIntencion.BuscarCiudad(ciudadABuscar)) // habra que cambiar esto y colocarle seleccionar? no
             } else {
                 onAction(CiudadesIntencion.BuscarCiudad(""))
             }

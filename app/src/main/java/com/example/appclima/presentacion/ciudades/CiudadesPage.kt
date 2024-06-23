@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.appclima.presentacion.clima.ClimaView
-import com.example.appclima.presentacion.clima.ClimaViewModel
 import com.example.appclima.repository.RepositorioApi
 import com.example.appclima.repository.RepositorioMock
 import com.example.appclima.router.Enrutador

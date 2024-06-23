@@ -1,11 +1,10 @@
-package com.example.appclima.presentacion.clima
+package com.example.appclima.presentacion.clima.actual
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +35,7 @@ fun ClimaView(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         when(state){
-            is ClimaEstado.Error -> ErrorView(mensaje = "Este es el mensaje de ERROR")
+            is ClimaEstado.Error -> ErrorView(mensaje = state.mensaje)
             is ClimaEstado.Exitoso -> ClimaView(
                 ciudad = state.ciudad,
                 temperatura = state.temperatura,
@@ -51,25 +50,6 @@ fun ClimaView(
 
         Spacer(modifier = Modifier.height(100.dp))
 
-//        Button(
-//            onClick = {onAction(ClimaIntencion.BorrarTodo)}) {
-//            Text(text = "Borrar todo")
-//        }
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//        Button(onClick = {onAction(ClimaIntencion.MostrarCABA)}) {
-//            Text(text = "Temp CABA")
-//        }
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//        Button(onClick = {onAction(ClimaIntencion.MostrarCordoba)}) {
-//            Text(text = "Temp Cordoba")
-//        }
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//        Button(onClick = {onAction(ClimaIntencion.MostrarError)}) {
-//            Text(text = "Probar Error")
-//        }
     }
 
 }

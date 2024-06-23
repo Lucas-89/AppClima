@@ -1,4 +1,4 @@
-package com.example.appclima.presentacion.clima
+package com.example.appclima.presentacion.clima.actual
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.appclima.repository.Repositorio
-import com.example.appclima.repository.modelos.Ciudad
 import com.example.appclima.router.Router
 import kotlinx.coroutines.launch
 
@@ -15,7 +14,8 @@ class ClimaViewModel(
     val repositorio: Repositorio,
     router : Router,
     val lat : Float,
-    val lon : Float
+    val lon : Float,
+    val nombre: String
 ): ViewModel() {
 
       //unico estado observable
@@ -34,7 +34,7 @@ class ClimaViewModel(
                val clima = repositorio.traerClima(lat = lat, lon = lon)
                uiState = ClimaEstado.Exitoso(
                    ciudad = clima.name,
-                   temperatura = clima.main.temp ,
+                   temperatura = clima.main.temp,
                    descripcion = clima.weather.first().description,
                    st = clima.main.feelsLike,
                )
@@ -48,12 +48,13 @@ class ClimaViewModelFactory(
     private val repositorio: Repositorio,
     private val router: Router,
     private val lat : Float,
-    private val lon : Float
+    private val lon : Float,
+    private val nombre: String
 ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ClimaViewModel::class.java)) {
-                return ClimaViewModel(repositorio,router,lat,lon) as T
+                return ClimaViewModel(repositorio,router,lat,lon, nombre) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

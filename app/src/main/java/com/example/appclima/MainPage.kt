@@ -24,15 +24,17 @@ fun MainPage(modifier: Modifier){
             CiudadesPage (modifier = modifier, navHostController)
         }
         composable(
-            route = "clima?lat={lat}&lon={lon}",
+            route = "clima?lat={lat}&lon={lon}&nombre={nombre}",
             arguments = listOf(
                 navArgument("lat") {type = NavType.FloatType},
-                navArgument("lon") {type = NavType.FloatType}
+                navArgument("lon") {type = NavType.FloatType},
+                navArgument("nombre") {type = NavType.StringType}
             )
         ) {
             val lat = it.arguments?.getFloat("lat") ?: 0.0f
             val lon = it.arguments?.getFloat("lat") ?: 0.0f
-            ClimaPage (modifier = modifier, navHostController, lat = lat, lon = lon)
+            val nombre = it.arguments?.getString("nombre") ?: ""
+            ClimaPage (modifier = modifier, navHostController, lat = lat, lon = lon, nombre = nombre)
         }
     }
 }

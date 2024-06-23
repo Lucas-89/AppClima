@@ -8,7 +8,7 @@ class Enrutador(
 ) : Router{
     @SuppressLint("DefaultLocale")
     override fun navegar(ruta: Ruta) {
-        navHostController.navigate(ruta.id)
+       // navHostController.navigate(ruta.id)
         when(ruta){
             Ruta.Ciudades -> navHostController.navigate(ruta.id)
 

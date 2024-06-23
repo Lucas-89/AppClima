@@ -31,9 +31,9 @@ data class Weather(
 
 data class Main(
     val temp: Double,           // temperatura
-    val feelsLike: Double,      // sensacion termica
-    val tempMin: Double,
-    val tempMax: Double,
+    val feelsLike: Double ,      // sensacion termica
+    val tempMin: Double ,
+    val tempMax: Double ,
     val pressure: Long,
     val humidity: Long,
 )

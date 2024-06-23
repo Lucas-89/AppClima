@@ -2,6 +2,8 @@ package com.example.appclima.repository
 
 import com.example.appclima.repository.modelos.Ciudad
 import com.example.appclima.repository.modelos.Clima
+import com.example.appclima.repository.modelos.ForecastDTO
+import com.example.appclima.repository.modelos.ListForecast
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -53,9 +55,19 @@ class RepositorioApi : Repositorio {
         }
     }
 
-    override suspend fun traerPronostico(lat: Float, lon: Float): List<Clima> {
-        TODO("Not yet implemented")
-        //para esto necesito saber que responde esa api
+    override suspend fun traerPronostico(lat: Float, lon: Float): List<ListForecast> {
+        val respuesta = cliente.get("https://api.openweathermap.org/data/2.5/forecast"){
+            parameter("lat",lat)
+            parameter("lon",lon)
+            parameter("units","metric")
+            parameter("appid",apiKey)
+        }
+        if (respuesta.status == HttpStatusCode.OK){
+            val forecast = respuesta.body<ForecastDTO>()
+            return forecast.list
+        }else{
+            throw Exception()
+        }
     }
 }
 
