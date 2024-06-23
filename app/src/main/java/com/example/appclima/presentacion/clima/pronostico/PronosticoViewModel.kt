@@ -9,11 +9,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.appclima.repository.Repositorio
 import com.example.appclima.router.Router
 import kotlinx.coroutines.launch
+import com.example.appclima.repository.modelos.ListForecast
+
 
 class PronosticoViewModel(
     val respositorio: Repositorio,
     val router: Router,
-    val nombre: String
+    val nombre: String,
+    val lat: Float,
+    val lon: Float
 ) : ViewModel() {
 
     var uiState by mutableStateOf<PronosticoEstado>(PronosticoEstado.Vacio)
@@ -45,11 +49,13 @@ class PronosticoViewModelFactory(
     private val repositorio: Repositorio,
     private val router: Router,
     private val nombre: String,
+    private val lat: Float,
+    private val lon: Float
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PronosticoViewModel::class.java)) {
-            return PronosticoViewModel(repositorio,router,nombre) as T
+            return PronosticoViewModel(repositorio,router,nombre,lat,lon) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
