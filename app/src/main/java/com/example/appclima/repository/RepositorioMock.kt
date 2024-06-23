@@ -40,7 +40,7 @@ class RepositorioMock : Repositorio {
         //aca deberia rellenar con una informacion de clima
     }
 
-    override suspend fun traerPronostico(lat: Float, lon: Float): List<Forecast> {
+    override suspend fun traerPronostico(lat: Float, lon: Float): List<ListForecast> {
         TODO("Not yet implemented")
         //aca deberia rellenar con una informacion del pronostico extendido
     }
