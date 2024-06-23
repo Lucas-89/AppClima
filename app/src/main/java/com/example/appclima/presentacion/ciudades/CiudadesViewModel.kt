@@ -22,7 +22,7 @@ class CiudadesViewModel(
     fun ejecutar(intencion: CiudadesIntencion){
         when(intencion){
             is CiudadesIntencion.BuscarCiudad -> buscarCiudades(nombreCiudad = intencion.nombreCiudad)
-            is CiudadesIntencion.SeleccionarCiudad -> seleccionarCiudad(ciudad = intencion.nombreCiudad) //deberia ser nombre
+            is CiudadesIntencion.SeleccionarCiudad -> seleccionarCiudad(ciudad = intencion.nombreCiudad)
         }
     }
 

@@ -40,7 +40,6 @@ fun ClimaView(
                 ciudad = state.ciudad,
                 temperatura = state.temperatura,
                 descripcion = state.descripcion,
-                st = state.st,
                 latitud = state.latitud,
                 longitud = state.longitud
             )
@@ -65,12 +64,11 @@ fun LoadingView(){
 }
 
 @Composable
-fun ClimaView(ciudad: String, temperatura: Double, descripcion: String, st: Double, latitud: Double, longitud: Double){
+fun ClimaView(ciudad: String, temperatura: Double, descripcion: String,  latitud: Double, longitud: Double){
     Column{
         Text(text = ciudad, style = MaterialTheme.typography.bodySmall)
         Text(text = "${temperatura}°", style = MaterialTheme.typography.titleLarge)
         Text(text = descripcion)
-        Text(text = "Sensacion Termica: ${st}°")
         Text(text = "Latitud: ${latitud}")
         Text(text = "Longitud: ${longitud}")
     }
@@ -105,7 +103,6 @@ fun ClimaPreviewExitoso() {
             ciudad = "Monte Chingolo",
             temperatura = 20.0,
             descripcion = "Ventoso",
-            st = 19.0,
             latitud = 6952.0,
             longitud = 210.0
         ), onAction = {} )

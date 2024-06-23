@@ -3,11 +3,10 @@ package com.example.appclima.presentacion.clima.actual
 sealed class ClimaEstado{
     data class Exitoso(
         val ciudad: String =  "",
-        val temperatura: Double = 0.0 ,
+        val temperatura: Double  ,
         val descripcion : String ="",
-        val st : Double = 0.0,
-        val longitud :  Double=0.0,
-        val latitud : Double =0.0,
+        val longitud :  Double,
+        val latitud : Double ,
         ): ClimaEstado()
     data class Error(
         val mensaje: String = ""
