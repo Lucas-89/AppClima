@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import com.example.appclima.ui.theme.AppClimaTheme
 
 
@@ -22,11 +24,9 @@ fun ClimaView(
     state : ClimaEstado,
     onAction: (ClimaIntencion) -> Unit
 ) {
-//
-//    var ciudad = remember {mutableStateOf<String>("Caba")}
-//    var temperatura = remember {mutableStateOf<Int>(19)}
-//    var descripcion = remember {mutableStateOf<String>("Nublado")}
-//    var st = remember {mutableStateOf<Int>(12)}
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME){
+        onAction(ClimaIntencion.ActualizarClima)
+    }
 
     Column (
         modifier = modifier
@@ -45,31 +45,31 @@ fun ClimaView(
                 latitud = state.latitud,
                 longitud = state.longitud
             )
-            ClimaEstado.Vacio -> EmptyView()
+            ClimaEstado.Vacio -> LoadingView()
             ClimaEstado.Cargando -> EmptyView()
         }
 
         Spacer(modifier = Modifier.height(100.dp))
 
-        Button(
-            onClick = {onAction(ClimaIntencion.BorrarTodo)}) {
-            Text(text = "Borrar todo")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(onClick = {onAction(ClimaIntencion.MostrarCABA)}) {
-            Text(text = "Temp CABA")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(onClick = {onAction(ClimaIntencion.MostrarCordoba)}) {
-            Text(text = "Temp Cordoba")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(onClick = {onAction(ClimaIntencion.MostrarError)}) {
-            Text(text = "Probar Error")
-        }
+//        Button(
+//            onClick = {onAction(ClimaIntencion.BorrarTodo)}) {
+//            Text(text = "Borrar todo")
+//        }
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        Button(onClick = {onAction(ClimaIntencion.MostrarCABA)}) {
+//            Text(text = "Temp CABA")
+//        }
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        Button(onClick = {onAction(ClimaIntencion.MostrarCordoba)}) {
+//            Text(text = "Temp Cordoba")
+//        }
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        Button(onClick = {onAction(ClimaIntencion.MostrarError)}) {
+//            Text(text = "Probar Error")
+//        }
     }
 
 }
@@ -77,6 +77,11 @@ fun ClimaView(
 @Composable
 fun ErrorView(mensaje: String){
     Text(text = mensaje)
+}
+
+@Composable
+fun LoadingView(){
+    Text(text = "Buscando Ciudad")
 }
 
 @Composable
@@ -92,7 +97,7 @@ fun ClimaView(ciudad: String, temperatura: Double, descripcion: String, st: Doub
 }
 @Composable
 fun EmptyView(){
-    Text(text = "Sin informacion, apreta un boton")
+    Text(text = "Sin informacion")
 }
 
 ////////////////////////////////////////////////////////////////

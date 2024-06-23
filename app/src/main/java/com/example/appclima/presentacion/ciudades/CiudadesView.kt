@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.appclima.presentacion.clima.ClimaEstado
 import com.example.appclima.presentacion.clima.ClimaIntencion
+import com.example.appclima.repository.modelos.Ciudad
 
 @Composable
 fun CiudadesView(
@@ -34,13 +35,12 @@ fun CiudadesView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var ciudadABuscar by remember { mutableStateOf("") }
-        // var nuevaBusqueda =""
 
         TextField(value = ciudadABuscar, onValueChange = {
             ciudadABuscar = it
         })
 
-        Button(onClick = {
+        Button(onClick = { //aca deberia usar Intencion.Seleccionar
             if (ciudadABuscar.isNotEmpty()) {
                 onAction(CiudadesIntencion.BuscarCiudad(ciudadABuscar))
             } else {
@@ -56,7 +56,7 @@ fun CiudadesView(
         when (state) {
             CiudadesEstado.Vacio -> EmptyView()
             CiudadesEstado.Cargando -> {Text(text = "Cargando")}
-            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades)
+            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades, {onAction(CiudadesIntencion.SeleccionarCiudad(it))})
             is CiudadesEstado.Error -> {Text(text = state.mensajeError)}
         }
     }
@@ -67,12 +67,13 @@ fun EmptyView(){Text(text = "Sin Resultados")}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaDeCiudades(ciudades: List<String>){
+fun ListaDeCiudades(ciudades: Array<Ciudad>, onSelect:(Ciudad)-> Unit){
     //TODO aca va el resultado de la buqueda, seria una lista de ciudades
+    //aca falta la logica para que si la busqueda no da resultados lo muestre
     LazyColumn {
         items(items = ciudades){
-            Card(onClick = { /*TODO*/ }){
-               Text(text = it)
+            Card(onClick = { onSelect(it) }){
+               Text(text = it.nombre)
             }
         }
     }
