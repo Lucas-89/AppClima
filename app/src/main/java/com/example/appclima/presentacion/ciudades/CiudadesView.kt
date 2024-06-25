@@ -1,8 +1,10 @@
 package com.example.appclima.presentacion.ciudades
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -29,14 +31,21 @@ fun CiudadesView(
     Column (
         modifier = modifier
             .fillMaxWidth()
-            .padding(top =40.dp),
+            .padding(top = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var ciudadABuscar by remember { mutableStateOf("") }
-
+        Text(
+            modifier = modifier
+                .wrapContentWidth(Alignment.CenterHorizontally)
+                .padding(top = 35.dp, bottom = 15.dp),
+            text = "Buscador de climas"
+        )
+        Spacer(modifier = modifier.padding(15.dp))
         TextField(value = ciudadABuscar, onValueChange = {
             ciudadABuscar = it
         })
+        Spacer(modifier = modifier.padding(15.dp))
 
         Button(onClick = { //aca deberia usar Intencion.Seleccionar
             if (ciudadABuscar.isNotEmpty()) {
@@ -51,6 +60,8 @@ fun CiudadesView(
                 text = "Buscar"
             )
         }
+        Spacer(modifier = modifier.padding(15.dp))
+
         when (state) {
             is CiudadesEstado.Error -> Text(text = state.mensajeError)
             CiudadesEstado.Cargando -> {Text(text = "Cargando")}
