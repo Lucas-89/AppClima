@@ -4,6 +4,8 @@ import com.example.appclima.presentacion.ciudades.CiudadesEstado
 import com.example.appclima.presentacion.ciudades.CiudadesIntencion
 import com.example.appclima.presentacion.ciudades.CiudadesViewModel
 import com.example.appclima.presentacion.ciudades.CiudadesViewModelFactory
+import com.example.appclima.presentacion.clima.actual.ClimaEstado
+import com.example.appclima.presentacion.clima.actual.ClimaViewModel
 import com.example.appclima.repository.RepositorioMock
 import com.example.appclima.router.MockRouter
 import kotlinx.coroutines.Dispatchers
@@ -56,6 +58,16 @@ class ExampleUnitTest {
             assertEquals(estadoEsperado,viewModel.uiState)
         }
     }
+//    @Test
+//    fun climaVM_buscar_clima1() = runTest(timeout = 3.seconds){
+//        val repositorio = RepositorioMock()
+//        val router = MockRouter()
+//
+//        val factory = ClimaViewModel.ClimaViewModelFactory(repositorio, router)
+//        val viewModel = factory.create(ClimaViewModel::class.java)
+//
+//
+//    }
 
 
     @Test
