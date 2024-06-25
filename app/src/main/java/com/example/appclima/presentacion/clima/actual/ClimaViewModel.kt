@@ -31,7 +31,7 @@ class ClimaViewModel(
         uiState = ClimaEstado.Cargando
         viewModelScope.launch {
            try {
-               val clima = repositorio.traerClima(lat = lat, lon = lon)
+               val clima = repositorio.traerClima(lat = lat, lon = lon, name = nombre)
                uiState = ClimaEstado.Exitoso(
                    ciudad = clima.name,
                    temperatura = clima.main.temp,

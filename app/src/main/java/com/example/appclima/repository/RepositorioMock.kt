@@ -35,7 +35,7 @@ class RepositorioMock : Repositorio {
         return ciudades.filter { it.name.contains(ciudad, ignoreCase = true) }
     }
 
-    override suspend fun traerClima(lat: Float, lon: Float): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float, name: String): Clima {
         TODO("Not yet implemented")
         //aca deberia rellenar con una informacion de clima
     }
@@ -53,7 +53,7 @@ class RepositorioMockError  : Repositorio {
         throw Exception()
     }
 
-    override suspend fun traerClima(lat: Float, lon: Float): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float, name: String): Clima {
         throw Exception()
     }
 

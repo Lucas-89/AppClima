@@ -39,7 +39,7 @@ class RepositorioApi : Repositorio {
         }
     }
 
-    override suspend fun traerClima(lat: Float, lon: Float): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float, name: String): Clima {
 
         val respuesta = cliente.get("https://api.openweathermap.org/data/2.5/weather"){
             parameter("lat", lat)
