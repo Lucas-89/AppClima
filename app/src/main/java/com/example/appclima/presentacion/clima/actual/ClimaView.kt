@@ -66,7 +66,7 @@ fun LoadingView(){
 @Composable
 fun ClimaView(ciudad: String, temperatura: Double, descripcion: String,  latitud: Double, longitud: Double){
     Column{
-        Text(text = ciudad, style = MaterialTheme.typography.bodySmall)
+        Text(text = "ciudad: ${ciudad}", style = MaterialTheme.typography.bodySmall)
         Text(text = "${temperatura}°", style = MaterialTheme.typography.titleLarge)
         Text(text = descripcion)
         Text(text = "Latitud: ${latitud}")
