@@ -32,7 +32,7 @@ class PronosticoViewModel(
         uiState = PronosticoEstado.Cargando
         viewModelScope.launch {
             try{
-                val forecast = respositorio.traerPronostico(lat, lon).take(10)
+                val forecast = respositorio.traerPronostico(lat, lon).take(5)
                 uiState = PronosticoEstado.Exitoso(forecast)
             } catch (exception: Exception){
                 uiState = PronosticoEstado.Error(exception.localizedMessage ?: "error desconocido")

@@ -63,7 +63,7 @@ fun ErrorView(mensaje: String){
 
 @Composable
 fun PronosticoView(climas: List<ListForecast>){
-    Text(text = "Pronostico Extendido")
+    Text(text = "Pronostico Extendido\nProximos 5 Pronosticos:")
     LazyColumn {
         items(items = climas) {
             Card(

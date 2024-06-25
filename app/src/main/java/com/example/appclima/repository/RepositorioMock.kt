@@ -31,13 +31,13 @@ class RepositorioMock : Repositorio {
 
         )
     val ciudades = listOf(ciudad1, ciudad2, ciudad3)
+
     override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
         return ciudades.filter { it.name.contains(ciudad, ignoreCase = true) }
     }
 
     override suspend fun traerClima(lat: Float, lon: Float, name: String): Clima {
         TODO("Not yet implemented")
-        //aca deberia rellenar con una informacion de clima
     }
 
     override suspend fun traerPronostico(lat: Float, lon: Float): List<ListForecast> {
