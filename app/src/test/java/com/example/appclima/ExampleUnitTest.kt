@@ -5,6 +5,7 @@ import com.example.appclima.presentacion.ciudades.CiudadesIntencion
 import com.example.appclima.presentacion.ciudades.CiudadesViewModel
 import com.example.appclima.presentacion.ciudades.CiudadesViewModelFactory
 import com.example.appclima.presentacion.clima.actual.ClimaEstado
+import com.example.appclima.presentacion.clima.actual.ClimaIntencion
 import com.example.appclima.presentacion.clima.actual.ClimaViewModel
 import com.example.appclima.repository.RepositorioMock
 import com.example.appclima.router.MockRouter
@@ -58,16 +59,28 @@ class ExampleUnitTest {
             assertEquals(estadoEsperado,viewModel.uiState)
         }
     }
-//    @Test
-//    fun climaVM_buscar_clima1() = runTest(timeout = 3.seconds){
-//        val repositorio = RepositorioMock()
-//        val router = MockRouter()
-//
-//        val factory = ClimaViewModel.ClimaViewModelFactory(repositorio, router)
-//        val viewModel = factory.create(ClimaViewModel::class.java)
-//
-//
-//    }
+    @Test
+    fun climaVM_buscar_clima1() = runTest(timeout = 5.seconds){
+        val repositorio = RepositorioMock()
+        val router = MockRouter()
+
+        val factory = ClimaViewModel.ClimaViewModelFactory(repositorio, router, lon = 123.2f, lat = 43.12f, nombre = "Bahia Blanca")
+        val viewModel = factory.create(ClimaViewModel::class.java)
+
+        val estadoEsperado = ClimaEstado.Exitoso(
+            ciudad = repositorio.clima1.name,
+            temperatura = repositorio.clima1.main.temp,
+            latitud = repositorio.clima1.coord.lat,
+            longitud = repositorio.clima1.coord.lon
+        )
+
+        launch(Dispatchers.Main){
+            viewModel.ejecutar(intencion = ClimaIntencion.ActualizarClima)
+            delay(3500.milliseconds)
+            assertEquals(estadoEsperado,viewModel.uiState)
+        }
+
+    }
 
 
     @Test

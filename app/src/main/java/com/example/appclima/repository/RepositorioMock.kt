@@ -119,7 +119,7 @@ class RepositorioMock : Repositorio {
 
     override suspend fun traerClima(lat: Float, lon: Float, name: String): Clima {
         TODO("Not yet implemented")
-        //para implementar esto deberia cambiar todos los lat y lon a Double
+        return climas.first { it.name == name}
     }
 
     override suspend fun traerPronostico(lat: Float, lon: Float): List<ListForecast> {
